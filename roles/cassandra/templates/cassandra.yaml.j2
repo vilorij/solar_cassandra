@@ -62,8 +62,8 @@ seed_provider:
       parameters:
           # seeds is actually a comma-delimited list of addresses.
           # Ex: "<ip1>,<ip2>,<ip3>"
-          #- seeds: "{{ groups.nodes | join(', ') }}"
-          - seeds: "151.248.112.11, 37.140.195.176"
+          - seeds: "{{ groups.nodes | join(', ') }}"
+
 
 concurrent_reads: 32
 concurrent_writes: 32
