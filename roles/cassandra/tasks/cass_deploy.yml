@@ -1,0 +1,26 @@
+---
+
+- name: Creates directory
+  file: path={{ install_directory }} state=directory owner={{ install_user }} group={{ install_user_group }}
+
+- name: download tarball
+  get_url: 
+    url: http://apache-mirror.rbc.ru/pub/apache/cassandra/{{ cassandra_version }}/apache-cassandra-{{ cassandra_version }}-bin.tar.gz
+    dest: /tmp/apache-cassandra-{{ cassandra_version }}-bin.tar.gz
+    mode: 755
+
+- name: untar tarball into {{ install_directory }}'/apache-cassandra-'{{ cassandra_version }}'
+  unarchive:
+    src: /tmp/apache-cassandra-{{ cassandra_version }}-bin.tar.gz
+    dest: "{{ install_directory }}"
+    remote_src: True
+    owner: "{{ install_user }}"
+#debug: "msg= Cassandra binary will be available at '{{ install_directory }}'/apache-cassandra-'{{ cassandra_version }}'/bin"
+
+
+
+- name: fix magic with permissions of directory
+  file: path={{ install_directory }}/apache-cassandra-{{ cassandra_version }} owner={{ install_user }} 
+
+- name: Set config
+  template: src=cassandra.yaml.j2 dest={{ install_directory }}/apache-cassandra-{{ cassandra_version }}/conf/cassandra.yaml

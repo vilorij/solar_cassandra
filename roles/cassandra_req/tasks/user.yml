@@ -1,0 +1,17 @@
+---
+
+- name: Create group :{{ install_user_group }}
+  group:
+    name="{{ install_user_group }}"
+    gid=1337
+    state=present
+ 
+ 
+- name: Create user {{ install_user }}
+  user:
+    name="{{ install_user }}"
+    state=present
+    createhome=yes
+    group="{{ install_user_group }}"
+    password=priv3t_hakir
+ 

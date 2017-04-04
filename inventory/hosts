@@ -1,0 +1,15 @@
+[nodes]
+#List ip addresses of nodes here
+srv2
+srv1
+
+[nodes:vars]
+# dirty fix dependencies
+ansible_python_interpreter=/usr/bin/python3
+cluster_name="solar_cluster"
+#ansible_ssh_private_key_file=<SSH_PEM>
+#ansible_ssh_user=root
+install_user=cassandra
+install_user_group=cassandra
+install_directory=/opt/cassandra
+cassandra_version="3.10"

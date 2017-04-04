@@ -1,0 +1,11 @@
+---
+
+- name: Install Cassandra cluster
+  hosts:
+    - nodes
+  become_user: root
+  roles:
+  - cassandra_req
+  - cassandra
+  
+  

@@ -1,0 +1,14 @@
+---
+
+- name: Starting cluster
+  become: yes
+  become_user: "{{ install_user }}"
+  shell: "{{ install_directory }}/apache-cassandra-{{ cassandra_version }}/bin/cassandra"
+
+- name: Debugging starting process
+  shell: "ps auwx | grep cassandra"
+  register: id_proc
+
+- debug:
+    msg: "Cassandra started {{ id_proc.stdout }}"  
+
