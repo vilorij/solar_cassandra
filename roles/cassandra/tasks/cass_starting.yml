@@ -1,5 +1,8 @@
 ---
 
+-name: Stopping previos instance
+  shell: pkill java
+
 - name: Starting cluster
   become: yes
   become_user: "{{ install_user }}"

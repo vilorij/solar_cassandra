@@ -1,0 +1,23 @@
+---
+
+- name: Install optional packages
+  apt: state=installed pkg=ufw
+
+- name: Setup ufw
+  ufw: state=enabled policy=deny
+
+- name: Allow ssh traffic
+  ufw: rule=allow port=22 proto=tcp
+
+- name: Allow ssh traffic
+  ufw: rule=allow port=22 proto=tcp
+
+- ufw:
+    rule: allow
+    src: '{{ item }}'
+  with_items:
+    - "{{ groups.nodes[0] }}"/32
+    - "{{ groups.nodes[1] }}"/32
+    - "{{ groups.nodes[2] }}"/32
+    - "{{ groups.nodes[3] }}"/32
+
